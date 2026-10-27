@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Clima en tiempo real</title>
+<meta name="description" content="Clima actual y pronóstico de 5 días de cualquier ciudad, con geolocalización.">
+<meta name="theme-color" content="#0f172a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Fraunces:opsz,wght@9..144,300;9..144,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="default">
+<script>document.body.dataset.mode=localStorage.getItem('mode')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark')</script>
+<div class="bg"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
+<div id="fx" aria-hidden="true"></div>
+<div class="app">
+  <header>
+    <h1>Clima</h1>
+    <form id="form" autocomplete="off">
+      <div class="sw">
+        <input id="q" type="search" placeholder="Busca una ciudad, ej. Hermosillo" aria-label="Ciudad" aria-autocomplete="list" aria-controls="sug" required>
+        <ul id="sug" class="sug" role="listbox" hidden></ul>
+      </div>
+      <button class="btn primary" type="submit">Buscar</button>
+      <button class="btn" type="button" id="geo">Mi ubicación</button>
+      <button class="btn icon" type="button" id="units" title="Cambiar unidades" aria-label="Cambiar unidades">°C</button>
+      <button class="btn icon" type="button" id="mode" aria-label="Cambiar entre modo claro y oscuro">Claro</button>
+      <button class="btn icon" type="button" id="cfg" title="API key" aria-label="Configurar API key">Key</button>
+    </form>
+  </header>
+  <div id="recent" class="chips"></div>
+  <p id="msg" class="msg" role="alert" hidden></p>
+  <main id="view" aria-live="polite"></main>
+</div>
+<dialog id="dlg">
+  <h2>API key de OpenWeatherMap</h2>
+  <p>Pégala aquí. Se guarda solo en este navegador.</p>
+  <input id="keyIn" type="text" placeholder="Tu API key" spellcheck="false">
+  <div class="row"><button class="btn" id="keyCancel" type="button">Cancelar</button><button class="btn primary" id="keySave" type="button">Guardar</button></div>
+</dialog>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
